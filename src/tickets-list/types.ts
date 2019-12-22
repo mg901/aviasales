@@ -33,7 +33,7 @@ export type Ticket = {
       stops: string[];
       // Общее время перелёта в минутах
       duration: number;
-    }
+    },
   ];
 };
 

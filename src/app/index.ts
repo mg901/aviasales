@@ -1,2 +1,2 @@
-export { $searchID } from "./model";
-export { App } from "./app";
+export { $searchID } from './model';
+export { App } from './app';
