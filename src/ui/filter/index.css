@@ -1,0 +1,9 @@
+.filter {
+  font-size: var(--font-size-sm);
+  line-height: 20px;
+}
+
+.filter:hover {
+  background-color: var(--blue);
+  padding: var(--half-gap) var(--gap);
+}

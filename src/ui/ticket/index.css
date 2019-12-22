@@ -1,0 +1,14 @@
+.ticket {
+  padding: var(--gap);
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--gap);
+}
+
+.ticket__title {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--gap);
+}

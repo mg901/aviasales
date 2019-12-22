@@ -1,0 +1,16 @@
+.ticket__cell {
+  text-transform: uppercase;
+  font-weight: var(--font-normal);
+}
+
+.ticket__cell-title {
+  font-size: var(--font-size-xs);
+  line-height: 18px;
+  color: var(--gray-blue);
+}
+
+.ticket__cell-content {
+  font-size: var(--font-size-md);
+  line-height: 21px;
+  color: var(--dark-gray);
+}

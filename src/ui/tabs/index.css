@@ -1,0 +1,4 @@
+.tabs {
+  display: flex;
+  margin-bottom: var(--gap);
+}
