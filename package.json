@@ -8,6 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "commit": "cross-env git-cz",
     "pretty": "cross-env fixme=fixme prettier './**/**/**.{json,js,ts}' --write"
   },
   "eslintConfig": {
@@ -40,6 +41,8 @@
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -48,7 +51,9 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^4.4.1",
+    "commitizen": "^4.0.3",
     "cross-env": "^6.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
   }
