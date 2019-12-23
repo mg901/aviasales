@@ -1,6 +1,8 @@
-import React from "react";
-import { Filters, Header, Logo } from "../ui";
-import { AppGate } from "./model";
+import React from 'react';
+import { Header, Logo } from '../ui';
+import { AppGate } from './model';
+import { Content } from '../content';
+import './index.css';
 
 export const App: React.FC = () => (
   <div className="app">
@@ -8,9 +10,6 @@ export const App: React.FC = () => (
     <Header>
       <Logo />
     </Header>
-    <section data-layout="grid">
-      <aside data-layout="sidebar"></aside>
-      <main data-layout="main"></main>
-    </section>
+    <Content />
   </div>
 );

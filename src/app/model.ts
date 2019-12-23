@@ -9,6 +9,7 @@ export const $searchID = createStore<string>('');
 
 $searchID.on(getSearchId.done, (_, { result }) => result.searchId);
 
+// запрашиваем id поиска при загрузке страницы
 forward({
   from: AppGate.open,
   to: getSearchId,
