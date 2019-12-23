@@ -1,21 +1,22 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
+  // ширина и высота в пикселях
   size?: number;
 };
 
-export const Logo: React.FC<Props> = ({ size = 82 }) => (
+export const Logo: React.FC<Props> = ({ size = 80 }) => (
   <svg fill="none" height={size} viewBox="0 0 82 89" width={size}>
     <filter
       id="a"
-      color-interpolation-filters="sRGB"
+      colorInterpolationFilters="sRGB"
       filterUnits="userSpaceOnUse"
       height="66"
       width="66"
       x="8"
       y="23"
     >
-      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feFlood floodOpacity="0" result="BackgroundImageFix" />
       <feColorMatrix
         in="SourceAlpha"
         type="matrix"
@@ -41,14 +42,14 @@ export const Logo: React.FC<Props> = ({ size = 82 }) => (
     </filter>
     <filter
       id="b"
-      color-interpolation-filters="sRGB"
+      colorInterpolationFilters="sRGB"
       filterUnits="userSpaceOnUse"
       height="82"
       width="82"
       x="0"
       y="0"
     >
-      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feFlood floodOpacity="0" result="BackgroundImageFix" />
       <feColorMatrix
         in="SourceAlpha"
         type="matrix"
@@ -81,10 +82,10 @@ export const Logo: React.FC<Props> = ({ size = 82 }) => (
       y="10"
     >
       <path
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m41 70c16.5685 0 30-13.4315 30-30s-13.4315-30-30-30-30 13.4315-30 30 13.4315 30 30 30z"
         fill="#fff"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       />
     </mask>
     <mask
@@ -96,47 +97,47 @@ export const Logo: React.FC<Props> = ({ size = 82 }) => (
       y="13"
     >
       <path
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m51.1946 29.0278c.2-.1155.4205-.1872.651-.2017 1.0165-.064 3.9524-.1481 4.5891.9548.6368 1.1029-.9049 3.6028-1.4687 4.4505-.1277.1921-.3.347-.4998.4624l-6.0758 3.5078.8439 17.1004c.0118.2394-.1093.4659-.315.5891l-1.2493.7482c-.1645.0986-.3643.1193-.5456.0567l-.9468-.327c-.1586-.0547-.2899-.1688-.3662-.3182l-6.458-12.6316-6.3691 3.6772-.6869 4.6714c-.0476.3234-.3281.561-.6548.5548l-.498-.0094c-.2519-.0048-.4783-.1549-.5808-.385l-1.7897-4.016c-1.2302.0393-2.385-.0816-2.6949-.6182-.3095-.5361.1637-1.5919.8138-2.6329l-2.5635-3.531c-.148-.2038-.1647-.4749-.0429-.6954l.2408-.436c.158-.2861.504-.4101.8078-.2897l4.3622 1.7302 6.3805-3.6837-7.6587-11.8288c-.0912-.1409-.1244-.3115-.0925-.4763l.1903-.9835c.0364-.1883.1542-.3509.3219-.4441l1.2726-.7078c.2095-.1166.4662-.1082.6676.0218l14.2977 9.2231z"
         fill="#fff"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       />
     </mask>
     <g filter="url(#a)">
       <path
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m41 70c12.1503 0 22-9.8497 22-22s-9.8497-22-22-22-22 9.8497-22 22 9.8497 22 22 22z"
         fill="#000"
-        fill-opacity=".01"
-        fill-rule="evenodd"
+        fillOpacity=".01"
+        fillRule="evenodd"
       />
     </g>
     <g filter="url(#b)">
       <path
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="m41 70c16.5685 0 30-13.4315 30-30s-13.4315-30-30-30-30 13.4315-30 30 13.4315 30 30 30z"
         fill="#2196f3"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       />
       <path
         d="m69 40c0 15.464-12.536 28-28 28s-28-12.536-28-28 12.536-28 28-28 28 12.536 28 28z"
         stroke="#42a5f5"
-        stroke-width="4"
+        strokeWidth="4"
       />
     </g>
-    <g mask="url(#c)" stroke="#42a5f5" stroke-width="4">
-      <path d="m13.714 32.875h53.822" stroke-linecap="square" />
-      <path d="m13.714 48.625h53.822" stroke-linecap="square" />
-      <g stroke-linecap="round" stroke-linejoin="round">
+    <g mask="url(#c)" stroke="#42a5f5" strokeWidth="4">
+      <path d="m13.714 32.875h53.822" strokeLinecap="square" />
+      <path d="m13.714 48.625h53.822" strokeLinecap="square" />
+      <g strokeLinecap="round" strokeLinejoin="round">
         <path d="m40.25 14.5s-9.9622 11.5775-9.7465 26.25c.2156 14.6725 9.7465 24.75 9.7465 24.75" />
         <path d="m41 14.5s9.9622 11.5775 9.7465 26.25c-.2156 14.6725-9.7465 24.75-9.7465 24.75" />
       </g>
     </g>
     <path
-      clip-rule="evenodd"
+      clipRule="evenodd"
       d="m51.1946 29.0278c.2-.1155.4205-.1872.651-.2017 1.0165-.064 3.9524-.1481 4.5891.9548.6368 1.1029-.9049 3.6028-1.4687 4.4505-.1277.1921-.3.347-.4998.4624l-6.0758 3.5078.8439 17.1004c.0118.2394-.1093.4659-.315.5891l-1.2493.7482c-.1645.0986-.3643.1193-.5456.0567l-.9468-.327c-.1586-.0547-.2899-.1688-.3662-.3182l-6.458-12.6316-6.3691 3.6772-.6869 4.6714c-.0476.3234-.3281.561-.6548.5548l-.498-.0094c-.2519-.0048-.4783-.1549-.5808-.385l-1.7897-4.016c-1.2302.0393-2.385-.0816-2.6949-.6182-.3095-.5361.1637-1.5919.8138-2.6329l-2.5635-3.531c-.148-.2038-.1647-.4749-.0429-.6954l.2408-.436c.158-.2861.504-.4101.8078-.2897l4.3622 1.7302 6.3805-3.6837-7.6587-11.8288c-.0912-.1409-.1244-.3115-.0925-.4763l.1903-.9835c.0364-.1883.1542-.3509.3219-.4441l1.2726-.7078c.2095-.1166.4662-.1082.6676.0218l14.2977 9.2231z"
       fill="#fff"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     />
     <g mask="url(#d)">
       <path
@@ -144,7 +145,7 @@ export const Logo: React.FC<Props> = ({ size = 82 }) => (
         fill="#ebecf2"
         transform="matrix(.5 .8660254 -.8660254 .5 49.427639 -24.043383)"
       />
-      <g clip-rule="evenodd" fill-rule="evenodd">
+      <g clipRule="evenodd" fillRule="evenodd">
         <path
           d="m48.9193 55.8911c.2057-.1232.3268-.3496.315-.5891l-.8715-17.6594-9.2364 5.3326 6.685 13.0756c.0763.1494.2076.2635.3662.3182l.9468.327c.1813.0627.3811.0419.5456-.0567z"
           fill="#dee1e3"
