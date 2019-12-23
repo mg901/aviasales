@@ -5,3 +5,4 @@ export { Sidebar } from './sidebar';
 export { Filter } from './filter';
 export { Tabs } from './tabs';
 export { Tab } from './tab';
+export { Ticket } from './ticket';
