@@ -1,0 +1,15 @@
+[data-layout='grid'] {
+  display: grid;
+  grid-template-columns: [sidebar] 232px [main] 502px;
+  grid-column-gap: var(--gap);
+  width: max-content;
+  margin: 0 auto;
+}
+
+[data-layout='sidebar'] {
+  grid-column: sidebar;
+}
+
+[data-layout='main'] {
+  grid-column: main;
+}
