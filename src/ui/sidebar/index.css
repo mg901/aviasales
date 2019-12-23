@@ -1,0 +1,15 @@
+.sidebar__wrap {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.sidebar__title {
+  padding: var(--gap);
+  font-size: var(--font-size-xs);
+  line-height: 12px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+}
