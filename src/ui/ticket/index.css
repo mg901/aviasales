@@ -6,6 +6,23 @@
   margin-bottom: var(--gap);
 }
 
+.ticket__header {
+  display: flex;
+}
+
+.ticket__price {
+  margin-right: auto;
+  font-size: var(--font-size-lg);
+  line-height: 24px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-weight: var(--font-bold);
+}
+
+.ticket__carrier {
+  margin-left: auto;
+}
+
 .ticket__title {
   color: var(--color-primary);
   text-transform: uppercase;
