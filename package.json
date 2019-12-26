@@ -34,7 +34,6 @@
   "dependencies": {
     "effector": "^20.8.1",
     "effector-react": "^20.5.1",
-    "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
