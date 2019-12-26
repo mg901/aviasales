@@ -8,6 +8,6 @@ type Props = {
 export const Sidebar: React.FC<Props> = ({ children }) => (
   <div className="sidebar__wrap">
     <div className="sidebar__title">Количество пересадок</div>
-    <ul>{children}</ul>
+    <ul className="sidebar__list">{children}</ul>
   </div>
 );
