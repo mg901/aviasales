@@ -1,4 +1,5 @@
-const API_ROOT = 'https://front-test.beta.aviasales.ru/';
+const API_ROOT_URL = 'https://front-test.beta.aviasales.ru/';
+export const CDN_URL = `//pics.avs.io/99/36`;
 
 type Request = <T>(method: string, url: string, data?: any) => Promise<T>;
 
@@ -9,7 +10,7 @@ const request: Request = async (method, url, data) => {
 
   if (data) options.body = JSON.stringify(data);
 
-  const x = await fetch(`${API_ROOT}${url}`, options);
+  const x = await fetch(`${API_ROOT_URL}${url}`, options);
 
   return x.json();
 };
