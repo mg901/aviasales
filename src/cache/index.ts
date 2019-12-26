@@ -1,0 +1,1 @@
+export { createCachingByInterval } from './model';
