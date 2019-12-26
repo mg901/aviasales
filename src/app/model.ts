@@ -1,6 +1,7 @@
 import { createStore, forward } from 'effector';
 import { createGate } from 'effector-react';
 import { getSearchId } from './effects';
+import { App } from './app';
 
 // check mount / unmount
 export const AppGate = createGate();
