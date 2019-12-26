@@ -1,5 +1,5 @@
 .ticket {
-  padding: var(--gap);
+  padding: var(--gap) calc(2.5 * var(--gap)) var(--gap) var(--gap);
   background-color: var(--white);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
@@ -8,6 +8,7 @@
 
 .ticket__header {
   display: flex;
+  align-items: center;
 }
 
 .ticket__price {
@@ -19,7 +20,7 @@
   font-weight: var(--font-bold);
 }
 
-.ticket__carrier {
+.ticket__carrier-img {
   margin-left: auto;
 }
 
@@ -28,4 +29,21 @@
   text-transform: uppercase;
   font-size: var(--font-size-lg);
   margin-bottom: var(--gap);
+}
+
+.ticket__cell {
+  text-transform: uppercase;
+  font-weight: var(--font-normal);
+}
+
+.ticket__cell-title {
+  font-size: var(--font-size-xs);
+  line-height: 18px;
+  color: var(--gray-blue);
+}
+
+.ticket__cell-content {
+  font-size: var(--font-size-md);
+  line-height: 21px;
+  color: var(--dark-gray);
 }
