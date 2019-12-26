@@ -1,4 +1,4 @@
-:root,
+@import-normalize :root,
 body {
   box-sizing: border-box;
 }
@@ -18,11 +18,12 @@ ol {
 
 :root {
   --white: #fff;
-  --light-gray: #e5e5e5;
   --gray: #dfe5ec;
   --dark-gray: #4a4a4a;
   --gray-blue: #a0b0b9;
-  --blue: #f1fcff;
+  --lighten-blue: #f3f7fa;
+  --light-blue: #f1fcff;
+  --blue: #9abbce;
   --dark-blue: #2196f3;
   --color-primary: var(--dark-blue);
   --color-secondary: var(--dray);
@@ -47,7 +48,25 @@ body {
   line-height: 20px;
   font-weight: 400;
   font-style: normal;
-  background-color: var(--light-gray);
+  background-color: var(--lighten-blue);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[data-layout='grid'] {
+  display: grid;
+  grid-template-columns: [sidebar] 232px [main] 502px;
+  grid-column-gap: var(--gap);
+  width: max-content;
+  margin: 0 auto;
+}
+
+[data-layout='sidebar'] {
+  grid-column: sidebar;
+}
+
+[data-layout='main'] {
+  grid-column: main;
+  display: flex;
+  flex-direction: column;
 }

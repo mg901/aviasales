@@ -1,5 +1,5 @@
 import { createEffect } from 'effector';
-import { get } from '../request';
+import { get } from '../api';
 import { SearchID } from './types';
 
 export const getSearchId = createEffect({
