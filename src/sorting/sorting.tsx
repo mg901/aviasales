@@ -1,9 +1,10 @@
 import React from 'react';
 import { Tabs, Tab } from '../ui';
+import { sortedByPrice, sortedByDuration } from './events';
 
 export const Sorting = () => (
   <Tabs>
-    <Tab onClick={() => {}}>Самый дешёвый</Tab>
-    <Tab onClick={() => {}}>Самый Быстрый</Tab>
+    <Tab onClick={() => sortedByPrice()}>Самый дешёвый</Tab>
+    <Tab onClick={() => sortedByDuration()}>Самый Быстрый</Tab>
   </Tabs>
 );

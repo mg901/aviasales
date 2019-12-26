@@ -1,24 +1,29 @@
-import { createStore, forward, sample, merge } from 'effector';
-import { loadTickets } from './effects';
+import {
+  createEvent,
+  createEffect,
+  createStore,
+  forward,
+  sample,
+  merge,
+} from 'effector';
+import { loadTickets, searchCompleted, searchIsNotCompleted } from './effects';
 import { $searchID } from '../app';
-import { Ticket } from './types';
+import { SearchResult } from './types';
 
-export const $tickets = createStore<Ticket[]>([]);
-export const $isTicketLoaded = createStore<boolean>(false);
+export const $searchResult = createStore<SearchResult>({
+  tickets: [],
+  stop: false,
+});
 
-$tickets.on(loadTickets.done, (state, { result }) => [
+export const $loadedTickets = $searchResult.map(({ tickets }) => tickets);
+export const $ticketsAreLoaded = $searchResult.map(({ stop }) => stop);
+
+$searchResult.on(searchCompleted, (state, { result }) => ({
   ...state,
-  ...result.tickets,
-]);
+  ...result,
+}));
 
-// показыаем лоадер до окончания поиска
-$isTicketLoaded.on(
-  loadTickets.done.filter({
-    fn: ({ result: { stop } }) => stop === true,
-  }),
-  () => true,
-);
-
+// запрашиваем билеты после получения id поиска
 forward({
   from: $searchID.updates,
   to: loadTickets,
@@ -26,12 +31,7 @@ forward({
 
 // запрашиваем билеты до тех пор, пока stop не будет равен true
 sample({
-  source: loadTickets,
-  clock: merge([
-    loadTickets.done.filter({
-      fn: ({ result: { stop } }) => stop !== true,
-    }),
-    loadTickets.fail,
-  ]),
+  source: $searchID,
+  clock: merge([searchIsNotCompleted, loadTickets.fail]),
   target: loadTickets,
 });
