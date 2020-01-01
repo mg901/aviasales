@@ -1,5 +1,5 @@
 import { createEffect } from 'effector';
-import { NomalizedTicket } from '../tickets-list/types';
+import { NomalizedTicket } from '../filter/types';
 
 export const sortByPrice = createEffect({
   handler: (x: NomalizedTicket[]) => {},

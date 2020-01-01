@@ -1,5 +1,5 @@
 import React from 'react';
-import { TicketsList } from '../tickets-list';
+import { TicketsList } from '../ticket-list';
 import { Filter } from '../filter';
 import { Sorting } from '../sorting';
 import './index.css';
