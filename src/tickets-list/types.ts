@@ -29,6 +29,5 @@ export type NomalizedTicket = {
     name: string;
   };
   segments: [NormalizedSegment, NormalizedSegment];
-  stops: number[];
   totalDuration: number;
 };
