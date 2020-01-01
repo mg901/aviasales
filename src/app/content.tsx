@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tickets } from '../tickets';
+import { TicketsList } from '../tickets-list';
 import { Filter } from '../filter';
 import { Sorting } from '../sorting';
 import './index.css';
@@ -11,7 +11,7 @@ export const Content = () => (
     </aside>
     <main data-layout="main">
       <Sorting />
-      <Tickets />
+      <TicketsList />
     </main>
   </section>
 );
