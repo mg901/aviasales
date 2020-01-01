@@ -1,6 +1,4 @@
-export const establishCase = (list: string[]) => (
-  x: number | string,
-): string => {
+export const establishCase = (x: number | string, list: string[]): string => {
   const value = Number(x);
   const index = value > 19 ? value % 10 : value % 100;
 
