@@ -14,16 +14,14 @@ export const FilterItem: React.FC<Props> = ({
   checked,
   onChange,
 }) => (
-  <li>
-    <label className="filter-item">
-      <input
-        type="checkbox"
-        value={value}
-        checked={checked}
-        className="filter-item__checkbox"
-        onChange={onChange}
-      />
-      {title}
-    </label>
-  </li>
+  <label className="filter-item">
+    <input
+      type="checkbox"
+      value={value}
+      checked={checked}
+      className="filter-item__checkbox"
+      onChange={onChange}
+    />
+    {title}
+  </label>
 );

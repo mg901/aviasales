@@ -1,53 +1,39 @@
-import { createStore, restore, sample, guard, split, combine } from 'effector';
-import { $loadedTickets, $ticketsAreLoaded } from '../search';
-import { makeTransferTitle } from './utils';
-import {
-  allFiltersAreToggled,
-  filterToggled,
-  allStopsSelected,
-  allStopsNotSelected,
-} from './events';
-import { makeStops } from './effects';
-import { Filter, FilterByAll } from './types';
+import { combine, merge } from 'effector';
+import { $cache } from '../cache';
+import { normalize, makeStopsList, makeTransferTitle } from './lib';
+import { filterToggled, filterByAllToggled } from './events';
+import { FilterFn } from './types';
 
-sample({
-  source: $loadedTickets,
-  clock: guard($ticketsAreLoaded, { filter: (is) => is }),
-  target: makeStops,
-});
+const $stopsList = $cache.map((x) => makeStopsList(x));
+const $normalizedTickets = $cache.map((x) => normalize(x));
 
-const $stopsList = restore(makeStops, []);
-
-// Фильтр
-export const $filterByAll = createStore<FilterByAll>({
+const filterByAll = {
   value: -1,
-  title: 'Все',
   checked: true,
-});
+  title: 'Все',
+};
 
-// создаём стор фильтров по остановкам
-export const $filtersByStops = $stopsList.map((stopsList) =>
-  stopsList.map<Filter>((stop) => ({
-    value: stop,
-    checked: true,
-    title: makeTransferTitle(stop),
-    fn: ({ stops }) => stops.map((s) => s === stop),
-  })),
+export const $filters = $stopsList.map((list) =>
+  list.reduce(
+    (acc, item) =>
+      acc.concat({
+        value: item,
+        checked: true,
+        title: makeTransferTitle(item),
+      }),
+    [filterByAll],
+  ),
 );
 
-const { togglerAllOn, togglerAllOff } = split(
-  sample($filterByAll, allFiltersAreToggled),
-  {
-    // создание ивента применяющий фильтр "Все" если все фильтры пересадок выбраны
-    togglerAllOn: (stop) => stop.checked,
-    // создание ивента сброса фильтра "Все" при выборе одного из фильров
-    togglerAllOff: (stop) => !stop.checked,
-  },
+const $filtersByStops = $filters.map((x) =>
+  x.filter(({ value }) => value > -1),
+);
+const $allStopsAreChecked = $filtersByStops.map((x) =>
+  x.map(({ checked }) => checked).every(Boolean),
 );
 
-$filtersByStops
-  // переключам конкретный фильтр
-  .on(filterToggled, (state, payload) =>
+$filters
+  .on(merge([filterToggled, filterByAllToggled]), (state, payload) =>
     state.map((filter) =>
       payload === filter.value
         ? {
@@ -57,53 +43,31 @@ $filtersByStops
         : filter,
     ),
   )
-
-  .on(togglerAllOn, (state) =>
-    state.map((filter) => ({
-      ...filter,
-      checked: true,
-    })),
+  .on(filterByAllToggled, (state) =>
+    state.map((filter) =>
+      filter.value !== -1 ? { ...filter, checked: !filter.checked } : filter,
+    ),
   )
-  .on(togglerAllOff, (state) =>
-    state.map((filter) => ({
-      ...filter,
-      checked: false,
-    })),
-  )
-  // Выделяем все фильры при нажатии на поле "Все"
-  .on(allStopsSelected, (state) =>
-    state.map((filter) => ({
-      ...filter,
-      checked: true,
-    })),
-  )
-  // Сбрасываем все фильры при нажатии на поле "Все"
-  .on(allStopsNotSelected, (state) =>
-    state.map((filter) => ({
-      ...filter,
-      checked: false,
-    })),
+  .on($allStopsAreChecked.updates, (state) =>
+    state.map((filter) =>
+      filter.value === -1 ? { ...filter, checked: !filter.checked } : filter,
+    ),
   );
 
-// все остановки выбраны или нет
-const $allStopsAreSelected = $filtersByStops.map((filtersByStops) =>
-  filtersByStops.map(({ checked }) => checked).every(Boolean),
+const $appliedFilters = $filters.map((filters) =>
+  filters
+    .filter(({ checked }) => checked)
+    .map<FilterFn>(({ value }) => (x) => x.includes(value)),
 );
 
-$filterByAll
-  .on(allFiltersAreToggled, (state) => ({
-    ...state,
-    checked: !state.checked,
-  }))
-  .on($allStopsAreSelected, (state, checked) => ({
-    ...state,
-    checked,
-  }));
-
-// Создаём общий стор фильтра
-export const $filters = combine({
-  stopsList: $stopsList,
-  togglerForAllStops: $filterByAll,
-  filtersByStops: $filtersByStops,
-  allStopsAreSelected: $allStopsAreSelected,
-});
+export const $filteredTickets = combine(
+  $normalizedTickets,
+  $appliedFilters,
+  (cache, appliedFilters) =>
+    cache.filter(({ stops }) =>
+      appliedFilters
+        .map((fn) => fn(stops))
+        .flat()
+        .some(Boolean),
+    ),
+);

@@ -1,13 +1,12 @@
 import { createEffect } from 'effector';
-import { Ticket } from '../search/types';
-import { uniq, compare } from '../lib';
+import { Filter } from './types';
 
-export const makeStops = createEffect({
-  handler: (x: Ticket[]) => {
-    const result = x
-      .map(({ segments }) => segments.map(({ stops }) => stops.length))
-      .flat();
-
-    return uniq(result).sort(compare);
+export const saveFilter = createEffect({
+  handler: (x: Filter[]) => {
+    localStorage.setItem('filter-state', JSON.stringify(x));
   },
+});
+
+export const loadFilter = createEffect({
+  handler: () => JSON.parse(String(localStorage.getItem('filter-state'))),
 });

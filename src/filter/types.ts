@@ -1,10 +1,11 @@
-import { NomalizedTicket } from '../tickets/types';
+import { Ticket } from '../search/types';
+
+export type FilterFn = (x: number[]) => boolean;
 
 export type Filter = {
   value: number;
   title: string;
   checked: boolean;
-  fn: (x: NomalizedTicket) => boolean[];
 };
 
-export type FilterByAll = Omit<Filter, 'fn'>;
+export type NormalizedTicket = Ticket & { stops: number[] };
