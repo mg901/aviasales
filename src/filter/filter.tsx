@@ -1,32 +1,20 @@
 import React from 'react';
-import { useList, useStore } from 'effector-react';
-import { Sidebar, FilterItem } from '../ui';
-import { allFiltersAreToggled, filterToggled } from './events';
-import { $filterByAll, $filtersByStops } from './model';
-
-const FilterByAll = () => {
-  const { value, checked, title } = useStore($filterByAll);
-
-  return (
-    <FilterItem
-      value={value}
-      title={title}
-      checked={checked}
-      onChange={() => allFiltersAreToggled()}
-    />
-  );
-};
+import { useList } from 'effector-react';
+import { FilterItem, Sidebar } from '../ui';
+import { filterToggled } from './events';
+import { $filters } from './model';
 
 export const Filter = () => (
   <Sidebar>
-    <FilterByAll />
-    {useList($filtersByStops, ({ value, checked, title }) => (
-      <FilterItem
-        value={value}
-        title={title}
-        checked={checked}
-        onChange={() => filterToggled(value)}
-      />
-    ))}
+    <form>
+      {useList($filters, ({ value, checked, title }) => (
+        <FilterItem
+          checked={checked}
+          value={value}
+          title={title}
+          onChange={() => filterToggled(value)}
+        />
+      ))}
+    </form>
   </Sidebar>
 );
