@@ -1,1 +1,1 @@
-export { createCachingByInterval } from './model';
+export { $cache, $isEmptyCache } from './model';

@@ -1,60 +1,67 @@
 import {
   createEffect,
-  restore,
   createStore,
   combine,
   guard,
   sample,
-  Event,
+  merge,
+  restore,
 } from 'effector';
 
-type CreaetCachingByInterval<T> = {
-  start: Event<T>;
-  stop: Event<T>;
-  interval?: number;
-};
+import {
+  searchCompleted,
+  searchIsNotCompleted,
+  $searchResult,
+} from '../search';
 
-export const createCachingByInterval = <T>({
-  start,
-  stop,
-  interval = 1000,
-}: CreaetCachingByInterval<T>) => {
-  const timer = createEffect({
-    handler: <T>(data: T): Promise<T> =>
-      new Promise((resolve) => {
-        setTimeout(() => resolve(data), interval);
-      }),
-  });
+import { founedTicketsReceived } from './events';
+import { Ticket } from '../search/types';
 
-  const $cache = restore(start, null);
-  const $working = createStore(true)
-    .on(start, () => true)
-    .on(stop, () => false);
+const INTERVAL = 1000;
 
-  // если таймер уже запущен не даём запуститься ему параллельно новом вызове start
-  const $isParallelRun = combine(
-    $working,
-    timer.pending,
-    (working, pending) => working && !pending,
-  );
+export const $cache = createStore<Ticket[]>([]);
+export const $isEmptyCache = $searchResult.map(
+  ({ tickets }) => tickets.length > 0,
+);
 
-  // запускаем таймер по событию start
-  guard({
-    source: start,
-    filter: $isParallelRun,
-    target: timer,
-  });
+const timer = createEffect({
+  handler: <T>(data: T): Promise<T> =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(data), INTERVAL);
+    }),
+});
 
-  // зацикливаем выполнение таймера
-  guard({
-    source: timer.done,
-    filter: $working,
-    target: timer.prepend(({ result }) => result),
-  });
+const $tickets = restore<Ticket[]>(founedTicketsReceived, []);
 
-  //  возвращаем вобытие передающие данные из start
-  return sample({
-    source: $cache,
-    clock: timer.done,
-  });
-};
+// флаг для старта / остановки кэширования
+const $working = createStore(true)
+  .on(searchIsNotCompleted, () => true)
+  .on(searchCompleted, () => false);
+
+// блокируем запуск аналогичного таймера
+const $isParallelRun = combine(
+  $working,
+  timer.pending,
+  (working, pending) => working && !pending,
+);
+
+// запускаем таймер по событию start
+guard({
+  source: searchIsNotCompleted,
+  filter: $isParallelRun,
+  target: timer,
+});
+
+// зацикливаем выполнение таймера
+guard({
+  source: timer.done,
+  filter: $working,
+  target: timer.prepend(({ result }) => result),
+});
+
+// кэшируем данные при первом удачном ответе сервера и далее по интервалу
+sample({
+  source: $tickets,
+  clock: merge([$isEmptyCache.updates, timer.done]),
+  target: $cache,
+});
