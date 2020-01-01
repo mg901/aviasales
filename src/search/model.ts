@@ -1,27 +1,18 @@
-import {
-  createEvent,
-  createEffect,
-  createStore,
-  forward,
-  sample,
-  merge,
-} from 'effector';
-import { loadTickets, searchCompleted, searchIsNotCompleted } from './effects';
-import { $searchID } from '../app';
-import { SearchResult } from './types';
+import { createStore, forward, sample, merge, restore } from 'effector';
+import { getSearchId, loadTickets, searchIsNotCompleted } from './effects';
 
-export const $searchResult = createStore<SearchResult>({
+export const $searchID = createStore('');
+export const $searchResult = restore(loadTickets, {
   tickets: [],
   stop: false,
 });
 
-export const $loadedTickets = $searchResult.map(({ tickets }) => tickets);
-export const $ticketsAreLoaded = $searchResult.map(({ stop }) => stop);
+$searchID.on(
+  getSearchId.done.map(({ result }) => result.searchId),
+  (_, payload) => payload,
+);
 
-$searchResult.on(searchCompleted, (state, { result }) => ({
-  ...state,
-  ...result,
-}));
+export const $searchCompleted = $searchResult.map(({ stop }) => stop);
 
 // запрашиваем билеты после получения id поиска
 forward({
@@ -31,7 +22,7 @@ forward({
 
 // запрашиваем билеты до тех пор, пока stop не будет равен true
 sample({
-  source: $searchID,
+  source: loadTickets,
   clock: merge([searchIsNotCompleted, loadTickets.fail]),
   target: loadTickets,
 });
