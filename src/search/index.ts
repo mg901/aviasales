@@ -1,2 +1,7 @@
-export { getSearchId, loadTickets } from './effects';
-export { $loadedTickets, $ticketsAreLoaded } from './model';
+export {
+  getSearchId,
+  loadTickets,
+  searchCompleted,
+  searchIsNotCompleted,
+} from './effects';
+export { $searchResult, $searchCompleted } from './model';
