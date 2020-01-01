@@ -60,14 +60,13 @@ const makeLogoURL = (x: string): string => {
   return `${CDN_URL}/${img}.png`;
 };
 
-export const normalizeTickets = (x: Ticket[]): NomalizedTicket[] =>
+export const normalize = (x: Ticket[]): NomalizedTicket[] =>
   x.map(({ price, carrier, segments: [head, tail] }) => {
     const title = normalizePrise(price);
     const logo = makeLogoURL(carrier);
     const [logoWidth, logoHeigth] = getLogoSize(CDN_URL);
     const there = normalizeSegment(head);
     const back = normalizeSegment(tail);
-    const stops = [there.stops.value, back.stops.value];
     const totalDuration = there.duration.value + back.duration.value;
 
     return {
@@ -82,7 +81,6 @@ export const normalizeTickets = (x: Ticket[]): NomalizedTicket[] =>
         name: CARRIERS_MAP[carrier],
       },
       segments: [there, back],
-      stops,
       totalDuration,
     };
   });
