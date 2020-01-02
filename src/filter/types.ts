@@ -1,7 +1,7 @@
 export type FilterFn = (x: number[]) => boolean;
 
 export type Filter = {
-  value: number;
+  stops: number;
   title: string;
   checked: boolean;
 };

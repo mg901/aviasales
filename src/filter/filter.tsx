@@ -1,18 +1,20 @@
 import React from 'react';
 import { useList } from 'effector-react';
+import { FilterByAll } from './filter-by-all';
 import { FilterItem, Sidebar } from '../ui';
-import { filterToggled } from './events';
-import { $filters } from './model';
+import { filterByStopToggled } from './events';
+import { $filtersByStops } from './model';
 
 export const Filter = () => (
   <Sidebar>
     <form>
-      {useList($filters, ({ value, checked, title }) => (
+      <FilterByAll />
+      {useList($filtersByStops, ({ stops, checked, title }) => (
         <FilterItem
+          value={stops}
           checked={checked}
-          value={value}
           title={title}
-          onChange={() => filterToggled(value)}
+          onChange={() => filterByStopToggled(stops)}
         />
       ))}
     </form>
