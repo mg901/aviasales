@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab } from '../ui';
+import { Tabs, Tab } from '../../ui';
 import { sortedByPrice, sortedByDuration } from './events';
 
 export const Sorting = () => (

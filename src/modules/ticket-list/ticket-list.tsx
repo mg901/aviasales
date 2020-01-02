@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStore, useList } from 'effector-react';
 import { $visibleTickets } from './model';
-import { Ticket } from '../ui';
+import { Ticket } from '../../ui';
 import { $isEmptyCache } from '../cache';
 
 export const TicketsList: React.FC = () => {

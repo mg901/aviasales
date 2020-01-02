@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'effector-react';
-import { FilterItem } from '../ui';
+import { FilterItem } from '../../ui';
 import { filterByAllToggled } from './events';
 import { $filterByAll } from './model';
 
