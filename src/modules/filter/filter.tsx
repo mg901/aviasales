@@ -1,7 +1,7 @@
 import React from 'react';
 import { useList } from 'effector-react';
 import { FilterByAll } from './filter-by-all';
-import { FilterItem, Sidebar } from '../ui';
+import { FilterItem, Sidebar } from '../../ui';
 import { filterByStopToggled } from './events';
 import { $filtersByStops } from './model';
 
