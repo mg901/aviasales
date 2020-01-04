@@ -5,16 +5,16 @@ import { FilterItem, Sidebar } from '../../ui';
 import { filterByStopToggled } from './events';
 import { $filtersByStops } from './model';
 
-export const Filter = () => (
+export const FilterList = () => (
   <Sidebar>
     <form>
       <FilterByAll />
-      {useList($filtersByStops, ({ stops, checked, title }) => (
+      {useList($filtersByStops, ({ type, checked, title }) => (
         <FilterItem
-          value={stops}
+          value={type}
           checked={checked}
           title={title}
-          onChange={() => filterByStopToggled(stops)}
+          onChange={() => filterByStopToggled(type)}
         />
       ))}
     </form>

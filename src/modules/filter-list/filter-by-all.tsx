@@ -5,11 +5,11 @@ import { filterByAllToggled } from './events';
 import { $filterByAll } from './model';
 
 export const FilterByAll = () => {
-  const { stops, checked, title } = useStore($filterByAll);
+  const { type, checked, title } = useStore($filterByAll);
 
   return (
     <FilterItem
-      value={stops}
+      value={type}
       title={title}
       checked={checked}
       onChange={() => filterByAllToggled()}
