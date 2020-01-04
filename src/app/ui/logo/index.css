@@ -8,7 +8,7 @@
 
 .logo[data-active='true'] div {
   position: absolute;
-  border: 3px solid #fff;
+  border: 3px solid var(--white);
   opacity: 1;
   border-radius: 50%;
   animation: logo 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
