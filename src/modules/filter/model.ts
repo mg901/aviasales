@@ -23,13 +23,12 @@ export const $filtersByStops = $stopsList.map((stopsList) =>
   })),
 );
 
-const { filterByAllOn, filterByAllOff } = split(
-  sample($filterByAll, filterByAllToggled),
-  {
-    filterByAllOn: ({ checked }) => checked,
-    filterByAllOff: ({ checked }) => !checked,
-  },
-);
+const filterByAllWasTaken = sample($filterByAll, filterByAllToggled);
+
+const { filterByAllOn, filterByAllOff } = split(filterByAllWasTaken, {
+  filterByAllOn: ({ checked }) => checked,
+  filterByAllOff: ({ checked }) => !checked,
+});
 
 $filtersByStops
   .on(filterByAllOn, (state) =>
