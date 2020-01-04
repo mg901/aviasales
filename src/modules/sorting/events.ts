@@ -1,4 +1,3 @@
 import { createEvent } from 'effector';
 
-export const sortedByPrice = createEvent();
-export const sortedByDuration = createEvent();
+export const sortedBy = createEvent<string>();
