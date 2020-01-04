@@ -1,7 +1,33 @@
-import { createStore, forward, sample, merge, restore } from 'effector';
-import { getSearchId, loadTickets, searchIsNotCompleted } from './effects';
+import {
+  createEffect,
+  createStore,
+  forward,
+  sample,
+  merge,
+  restore,
+} from 'effector';
+
+import { get } from '../../api';
+import { SearchID, SearchResult } from './types';
+
+export const getSearchId = createEffect({
+  handler: () => get<SearchID>('search'),
+});
+
+export const loadTickets = createEffect({
+  handler: (id: string) => get<SearchResult>(`tickets?searchId=${id}`),
+});
+
+export const searchCompleted = loadTickets.done.filter({
+  fn: ({ result: { stop } }) => stop === true,
+});
+
+export const searchIsNotCompleted = loadTickets.done.filter({
+  fn: ({ result: { stop } }) => stop !== true,
+});
 
 export const $searchID = createStore('');
+export const $loading = createStore(true).on(searchCompleted, () => false);
 export const $searchResult = restore(loadTickets, {
   tickets: [],
   stop: false,

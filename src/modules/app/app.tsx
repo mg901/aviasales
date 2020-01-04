@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, Logo } from '../../ui';
+import { Header } from './ui/header';
+import { Logo } from './ui/logo';
 import { AppGate } from './model';
 import { Content } from './content';
 import './index.css';

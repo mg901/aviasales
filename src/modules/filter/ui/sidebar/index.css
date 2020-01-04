@@ -1,0 +1,17 @@
+.sidebar__wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__title {
+  padding: var(--gap);
+  font-size: var(--font-size-xs);
+  line-height: 12px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+}
+
+.sidebar__list {
+  padding-bottom: var(--gap);
+}
