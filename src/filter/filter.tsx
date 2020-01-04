@@ -1,7 +1,8 @@
 import React from 'react';
 import { useList } from 'effector-react';
 import { FilterByAll } from './filter-by-all';
-import { Checkbox, Sidebar } from '../ui';
+import { Checkbox } from '../ui';
+import { Sidebar } from './ui/sidebar';
 import { $filtersByStops, filterByStopToggled } from './model';
 
 export const Filter = () => (
