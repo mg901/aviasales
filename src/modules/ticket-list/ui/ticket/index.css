@@ -1,0 +1,56 @@
+.ticket {
+  padding: var(--gap);
+}
+
+.ticket__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--gap);
+}
+
+.ticket__title {
+  margin-right: auto;
+  font-size: var(--font-size-lg);
+  line-height: 24px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-weight: var(--font-bold);
+}
+
+.ticket__carrier-logo {
+  --margin-right: calc(var(--gap) * 2.75);
+
+  margin-right: var(--margin-right);
+  margin-left: auto;
+}
+
+.ticket__title {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--gap);
+}
+
+.ticket__row {
+  display: flex;
+  margin-bottom: var(--half-gap);
+}
+
+.ticket__cell {
+  flex: 1;
+
+  font-weight: var(--font-bold);
+}
+
+.ticket__cell-title {
+  font-size: var(--font-size-xs);
+  line-height: 18px;
+  text-transform: uppercase;
+  color: var(--gray-blue);
+}
+
+.ticket__cell-content {
+  font-size: var(--font-size-md);
+  line-height: 21px;
+  color: var(--dark-gray);
+}
