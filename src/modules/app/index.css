@@ -34,6 +34,7 @@ ol {
   --font-size-base: var(--font-size-sm);
   --font-bold: 600;
   --font-normal: 400;
+  --letter-spacing: 0.5px;
   --font-body: 'Open sans', sans-serif;
   --radius-xs: 2px;
   --radius-sm: 5px;
