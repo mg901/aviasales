@@ -1,4 +1,4 @@
-import { $filteredTickets } from '../filters';
+import { $filteredTickets } from '../filter-list';
 import { combine, createStore } from 'effector';
 import { tabs } from './constants';
 import { sortedBy } from './events';
