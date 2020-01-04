@@ -1,5 +1,5 @@
-import { $filteredTickets } from '../filter';
+import { $sortedTickets } from '../sorting';
 
-export const $visibleTickets = $filteredTickets.map((tickets) =>
+export const $visibleTickets = $sortedTickets.map((tickets) =>
   tickets.slice(0, 5),
 );
