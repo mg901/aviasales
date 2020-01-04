@@ -1,6 +1,8 @@
 .header {
+  --padding-top: calc(2 * var(--gap));
+
   display: flex;
   justify-content: center;
-  padding-top: calc(2 * var(--gap));
+  padding-top: var(--padding-top);
   margin-bottom: 34px;
 }

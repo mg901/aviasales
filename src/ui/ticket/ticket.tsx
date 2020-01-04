@@ -18,20 +18,18 @@ export const Ticket: React.FC<Props> = ({
   price,
   carrier: { logo, logoWidth, logoHeigth, name },
   children,
-}) => {
-  return (
-    <div className="ticket">
-      <div className="ticket__header">
-        <span className="ticket__price">{price}</span>
-        <img
-          src={logo}
-          width={logoWidth}
-          height={logoHeigth}
-          className="ticket__carrier-img"
-          alt={name}
-        />
-      </div>
-      {children}
+}) => (
+  <div className="ticket">
+    <div className="ticket__header">
+      <span className="ticket__price">{price}</span>
+      <img
+        src={logo}
+        width={logoWidth}
+        height={logoHeigth}
+        className="ticket__carrier-img"
+        alt={name}
+      />
     </div>
-  );
-};
+    {children}
+  </div>
+);
