@@ -2,7 +2,7 @@ import { createEvent, combine, createStore } from 'effector';
 import { $filteredTickets } from '../filter';
 import { tabs } from './constants';
 
-import { compareNumeric } from '../../lib';
+import { compareNumeric } from '../lib';
 import { Tab } from './types';
 
 export const sortedBy = createEvent<string>();
