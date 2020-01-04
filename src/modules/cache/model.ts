@@ -17,7 +17,7 @@ import {
 import { founedTicketsReceived } from './events';
 import { Ticket } from '../search/types';
 
-const INTERVAL = 1000;
+const INTERVAL = 1500;
 
 export const $cache = createStore<Ticket[]>([]);
 export const $isEmptyCache = $searchResult.map(
