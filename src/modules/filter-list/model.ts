@@ -2,20 +2,20 @@ import { createStore, combine, sample, split } from 'effector';
 import { $cache } from '../cache';
 import { normalize, makeStopsList, makeTransferTitle } from './lib';
 import { filterByStopToggled, filterByAllToggled } from './events';
-import { FilterFn } from './types';
+import { Filter, FilterFn } from './types';
 
 const $stopsList = $cache.map((x) => makeStopsList(x));
 const $normalizedTickets = $cache.map((x) => normalize(x));
 
-export const $filterByAll = createStore({
-  stops: -1,
+export const $filterByAll = createStore<Filter>({
+  type: -1,
   checked: true,
   title: 'Все',
 });
 
 export const $filtersByStops = $stopsList.map((stopsList) =>
-  stopsList.map((stops) => ({
-    stops,
+  stopsList.map<Filter>((stops) => ({
+    type: stops,
     checked: true,
     title: makeTransferTitle(stops),
   })),
@@ -24,8 +24,8 @@ export const $filtersByStops = $stopsList.map((stopsList) =>
 const { filterByAllOn, filterByAllOff } = split(
   sample($filterByAll, filterByAllToggled),
   {
-    filterByAllOn: ({ checked }) => checked === true,
-    filterByAllOff: ({ checked }) => checked === false,
+    filterByAllOn: ({ checked }) => checked,
+    filterByAllOff: ({ checked }) => !checked,
   },
 );
 
@@ -44,7 +44,7 @@ $filtersByStops
   )
   .on(filterByStopToggled, (state, payload) =>
     state.map((filter) =>
-      payload === filter.stops
+      payload === filter.type
         ? {
             ...filter,
             checked: !filter.checked,
@@ -70,7 +70,7 @@ $filterByAll
 const $appliedFilters = $filtersByStops.map((filters) =>
   filters
     .filter(({ checked }) => checked)
-    .map<FilterFn>(({ stops }) => (x) => x.includes(stops)),
+    .map<FilterFn>(({ type }) => (x) => x.includes(type)),
 );
 
 export const $filteredTickets = combine(

@@ -1,16 +1,36 @@
 import { Ticket } from '../search/types';
-import { uniq, compare, establishCase } from '../../lib';
 import { NomalizedTicket, NormalizedSegment } from './types';
 import { CARRIERS_MAP } from './constants';
 import { CDN_URL } from '../../api';
+import { compare } from '../../lib';
 import { Segment } from '../search/types';
+
+const uniq = <T>(x: T[]): T[] => Array.from(new Set(x));
+
+const establishCase = (x: number | string, list: string[]): string => {
+  const value = Number(x);
+  const index = value > 19 ? value % 10 : value % 100;
+
+  switch (index) {
+    case 1:
+      return list[0];
+    case 2:
+    case 3:
+    case 4:
+      return list[1];
+    default:
+      return list[2];
+  }
+};
 
 export const makeStopsList = (x: Ticket[]): number[] => {
   const result = x
     .map(({ segments }) => segments.map(({ stops }) => stops.length))
     .flat();
 
-  return uniq(result).sort(compare);
+  return uniq(result)
+    .slice(0)
+    .sort(compare);
 };
 
 export const makeTransferTitle = (x: number): string => {
@@ -19,7 +39,7 @@ export const makeTransferTitle = (x: number): string => {
   return x === 0 ? `Без ${word}` : `${x} ${word}`;
 };
 
-export const normalizePrise = (x: number): string =>
+export const makePriceTitle = (x: number): string =>
   String(x).replace(/(\d{2})(\d+)/g, '$1 $2') + ' p';
 
 const calcTimeFormat = (x: Date, separator = ':'): string => {
@@ -77,18 +97,16 @@ const makeLogoURL = (x: string): string => {
 
 export const normalize = (x: Ticket[]): NomalizedTicket[] =>
   x.map(({ price, carrier, segments: [head, tail] }) => {
-    const title = normalizePrise(price);
+    const title = makePriceTitle(price);
     const logo = makeLogoURL(carrier);
     const [logoWidth, logoHeigth] = getLogoSize(CDN_URL);
     const there = normalizeSegment(head);
     const back = normalizeSegment(tail);
-    const totalDuration = there.duration.value + back.duration.value;
+    const duration = there.duration.value + back.duration.value;
 
     return {
-      price: {
-        title,
-        value: price,
-      },
+      price,
+      priceTitle: title,
       carrier: {
         logo,
         logoWidth,
@@ -96,7 +114,7 @@ export const normalize = (x: Ticket[]): NomalizedTicket[] =>
         name: CARRIERS_MAP[carrier],
       },
       segments: [there, back],
-      totalDuration,
+      duration,
       stops: [there.stops.value, back.stops.value],
     };
   });

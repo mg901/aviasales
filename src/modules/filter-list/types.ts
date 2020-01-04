@@ -1,10 +1,10 @@
 export type FilterFn = (x: number[]) => boolean;
 
-export type Filter = {
-  stops: number;
+export type Filter = Readonly<{
+  type: number;
   title: string;
   checked: boolean;
-};
+}>;
 
 export type NormalizedSegment = {
   direction: {
@@ -26,10 +26,8 @@ export type NormalizedSegment = {
 };
 
 export type NomalizedTicket = {
-  price: {
-    title: string;
-    value: number;
-  };
+  price: number;
+  priceTitle: string;
   carrier: {
     logo: string;
     logoWidth: number;
@@ -37,6 +35,6 @@ export type NomalizedTicket = {
     name: string;
   };
   segments: [NormalizedSegment, NormalizedSegment];
-  totalDuration: number;
+  duration: number;
   stops: number[];
 };
