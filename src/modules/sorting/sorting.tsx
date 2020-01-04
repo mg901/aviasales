@@ -1,8 +1,7 @@
 import React from 'react';
 import { useList } from 'effector-react';
-import { Tabs, Tab } from '../../ui';
-import { $tabs } from './model';
-import { sortedBy } from './events';
+import { Tabs, Tab } from './ui/tabs';
+import { $tabs, sortedBy } from './model';
 
 export const Sorting = () => (
   <Tabs>

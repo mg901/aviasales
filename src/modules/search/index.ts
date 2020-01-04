@@ -3,5 +3,6 @@ export {
   loadTickets,
   searchCompleted,
   searchIsNotCompleted,
-} from './effects';
-export { $searchResult, $searchCompleted } from './model';
+  $searchResult,
+  $searchCompleted,
+} from './model';

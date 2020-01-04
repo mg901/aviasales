@@ -1,6 +1,6 @@
-export { Logo } from './logo';
-export { Header } from './header';
-export { Sidebar } from './sidebar';
-export { FilterItem } from './filter-item';
-export { Tabs, Tab } from './tabs';
-export { Ticket } from './ticket';
+export { Button } from './button';
+export { Card } from './card';
+export { Logo } from '../modules/app/ui/logo';
+export { Header } from '../modules/app/ui/header';
+export { Sidebar } from '../modules/filter/ui/sidebar';
+export { Checkbox } from './checkbox';

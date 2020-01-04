@@ -1,1 +1,1 @@
-export { $cache, $isEmptyCache } from './model';
+export { $tickets, $isEmptyCache } from './model';

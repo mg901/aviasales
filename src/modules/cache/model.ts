@@ -14,24 +14,30 @@ import {
   $searchResult,
 } from '../search';
 
-import { founedTicketsReceived } from './events';
 import { Ticket } from '../search/types';
+import { normalizeTicket } from './normalize';
 
-const INTERVAL = 1500;
+export const founedTicketsReceived = searchIsNotCompleted.map(
+  ({ result }) => result.tickets,
+);
 
 export const $cache = createStore<Ticket[]>([]);
+export const $tickets = $cache.map((x) => x.map(normalizeTicket));
 export const $isEmptyCache = $searchResult.map(
   ({ tickets }) => tickets.length > 0,
 );
 
 const timer = createEffect({
-  handler: <T>(data: T): Promise<T> =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(data), INTERVAL);
-    }),
+  handler: <T>(data: T): Promise<T> => {
+    const interval = 1500;
+
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(data), interval);
+    });
+  },
 });
 
-const $tickets = restore<Ticket[]>(founedTicketsReceived, []);
+const $rawTickets = restore<Ticket[]>(founedTicketsReceived, []);
 
 // флаг для старта / остановки кэширования
 const $working = createStore(true)
@@ -42,7 +48,7 @@ const $working = createStore(true)
 const $isParallelRun = combine(
   $working,
   timer.pending,
-  (working, pending) => working && !pending,
+  (loading, pending) => loading && !pending,
 );
 
 // запускаем таймер по событию start
@@ -61,7 +67,7 @@ guard({
 
 // кэшируем данные при первом удачном ответе сервера и далее по интервалу
 sample({
-  source: $tickets,
+  source: $rawTickets,
   clock: merge([$isEmptyCache.updates, timer.done]),
   target: $cache,
 });
