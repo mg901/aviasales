@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import { Card } from '../../../../ui';
+import { Card } from '../../../ui';
 
 type Props = {
   children: React.ReactNode;

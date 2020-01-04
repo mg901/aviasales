@@ -1,4 +1,4 @@
-import { compareNumeric, uniq } from '../../lib';
+import { compareNumeric, uniq } from '../lib';
 import { NomalizedTicket } from '../cache/types';
 
 export const makeStopsList = (x: NomalizedTicket[]): number[] => {

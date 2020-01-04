@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from 'effector-react';
-import { Checkbox } from '../../ui';
+import { Checkbox } from '../ui';
 import { $filterByAll, filterByAllToggled } from './model';
 
 export const FilterByAll = () => {

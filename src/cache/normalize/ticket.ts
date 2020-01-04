@@ -1,13 +1,8 @@
 import { Ticket, Segment } from '../../search/types';
 import { NomalizedTicket, NormalizedSegment } from '../types';
 import { CARRIERS_MAP } from './constants';
-import { CDN_URL } from '../../../api';
-import {
-  compareNumeric,
-  uniq,
-  addMinutes,
-  makeTransferTitle,
-} from '../../../lib';
+import { CDN_URL } from '../../api';
+import { compareNumeric, uniq, addMinutes, makeTransferTitle } from '../../lib';
 
 export const makeStopsList = (x: Ticket[]): number[] => {
   const result = x

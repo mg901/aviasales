@@ -1,7 +1,7 @@
 import { createEvent, createStore, combine, sample, split } from 'effector';
 import { $tickets } from '../cache';
 import { makeStopsList } from './lib';
-import { makeTransferTitle } from '../../lib';
+import { makeTransferTitle } from '../lib';
 import { Filter, FilterFn } from './types';
 
 export const filterByStopToggled = createEvent<number>();
