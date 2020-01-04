@@ -1,15 +1,15 @@
-export type SearchID = {
+export type SearchID = Readonly<{
   searchId: string;
-};
+}>;
 
-export type SearchResult = {
+export type SearchResult = Readonly<{
   tickets: Ticket[];
   stop: boolean;
-};
+}>;
 
 // Массив перелётов.
 // В тестовом задании это всегда поиск "туда-обратно" значит состоит из двух элементов
-export type Segment = {
+export type Segment = Readonly<{
   // Код города (iata)
   origin: string;
   // Код города (iata)
@@ -20,12 +20,12 @@ export type Segment = {
   stops: string[];
   // Общее время перелёта в минутах
   duration: number;
-};
+}>;
 
-export type Ticket = {
+export type Ticket = Readonly<{
   // Цена в рублях
   price: number;
   // Код авиакомпании (iata)
   carrier: string;
   segments: [Segment, Segment];
-};
+}>;
