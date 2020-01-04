@@ -1,10 +1,13 @@
 import React from 'react';
+import { useList } from 'effector-react';
 import { Tabs, Tab } from '../../ui';
-import { sortedByPrice, sortedByDuration } from './events';
+import { $tabs } from './model';
+import { sortedBy } from './events';
 
 export const Sorting = () => (
   <Tabs>
-    <Tab onClick={() => sortedByPrice()}>Самый дешёвый</Tab>
-    <Tab onClick={() => sortedByDuration()}>Самый Быстрый</Tab>
+    {useList($tabs, ({ active, type, title }) => (
+      <Tab active={active} title={title} onClick={() => sortedBy(type)} />
+    ))}
   </Tabs>
 );
