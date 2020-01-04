@@ -1,5 +1,7 @@
 .ticket {
-  padding: var(--gap) calc(2.5 * var(--gap)) var(--gap) var(--gap);
+  --padding-left: calc(2.5 * var(--gap));
+
+  padding: var(--gap) var(--padding-left) var(--gap) var(--gap);
   background-color: var(--white);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow);

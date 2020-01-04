@@ -12,7 +12,7 @@
   line-height: 12px;
   font-weight: var(--font-bold);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: var(--letter-spacing);
 }
 
 .sidebar__list {

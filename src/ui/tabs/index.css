@@ -4,14 +4,16 @@
 }
 
 .tab {
+  --padding: 15px;
+
   flex: 1;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: var(--padding);
+  padding-bottom: var(--padding);
   font-size: var(--font-size-xs);
   line-height: 20px;
   font-weight: var(--font-bold);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: var(--letter-spacing);
   text-align: center;
   background-color: var(--white);
   border: 1px solid var(--gray);
@@ -28,7 +30,7 @@
   border-bottom-right-radius: var(--radius-sm);
 }
 
-.tab_active {
+.tab[data-active='true'] {
   color: var(--white);
   background-color: var(--color-primary);
   border: 1px solid var(--color-primary);
