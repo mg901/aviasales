@@ -1,12 +1,15 @@
 import React from 'react';
 import { useList } from 'effector-react';
-import { Tabs, Tab } from './ui/tabs';
+import { Tabs } from '../ui/tabs';
 import { $tabs, sortedBy } from './model';
+import { Button } from '../ui';
 
 export const Sorting = () => (
   <Tabs>
     {useList($tabs, ({ active, type, title }) => (
-      <Tab active={active} title={title} onClick={() => sortedBy(type)} />
+      <Button className="tab" active={active} onClick={() => sortedBy(type)}>
+        {title}
+      </Button>
     ))}
   </Tabs>
 );
