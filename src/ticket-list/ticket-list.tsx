@@ -7,9 +7,9 @@ export const TicketsList: React.FC = () => (
   <ul>
     {useList(
       $visibleTickets,
-      ({ priceTitle, carrier, segments: [there, back] }) => (
+      ({ id, priceTitle, carrier, segments: [there, back] }) => (
         <li>
-          <Ticket price={priceTitle} carrier={carrier}>
+          <Ticket key={id} price={priceTitle} carrier={carrier}>
             <TicketItem item={there} />
             <TicketItem item={back} />
           </Ticket>

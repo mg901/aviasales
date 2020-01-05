@@ -1,3 +1,4 @@
+import nanoid from 'nanoid';
 import { Ticket, Segment } from '../../search/types';
 import { NomalizedTicket, NormalizedSegment } from '../types';
 import { CARRIERS_MAP } from './constants';
@@ -83,6 +84,7 @@ export const normalizeTicket = ({
   const duration = there.duration.value + back.duration.value;
 
   return {
+    id: nanoid(),
     price,
     priceTitle: title,
     carrier: {

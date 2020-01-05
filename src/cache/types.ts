@@ -18,6 +18,7 @@ export type NormalizedSegment = {
 };
 
 export type NomalizedTicket = {
+  id: string;
   price: number;
   priceTitle: string;
   carrier: {
