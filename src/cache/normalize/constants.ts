@@ -1,4 +1,6 @@
-import { Map } from './types';
+export type Map = {
+  [key: string]: string;
+};
 
 export const CARRIERS_MAP: Map = {
   FV: 'Rossiya Airlines',

@@ -7,7 +7,11 @@ import { Button } from '../ui';
 export const Sorting = () => (
   <Tabs>
     {useList($tabs, ({ active, type, title }) => (
-      <Button className="tab" active={active} onClick={() => sortedBy(type)}>
+      <Button
+        key={type}
+        className="tab"
+        active={active}
+        onClick={() => sortedBy(type)}>
         {title}
       </Button>
     ))}
