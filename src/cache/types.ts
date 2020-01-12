@@ -18,7 +18,6 @@ export type NormalizedSegment = {
 };
 
 export type NomalizedTicket = {
-  id: string;
   price: number;
   priceTitle: string;
   carrier: {
@@ -27,7 +26,8 @@ export type NomalizedTicket = {
     logoHeigth: number;
     name: string;
   };
-  segments: [NormalizedSegment, NormalizedSegment];
+  there: NormalizedSegment;
+  back: NormalizedSegment;
   duration: number;
   stops: number[];
 };
