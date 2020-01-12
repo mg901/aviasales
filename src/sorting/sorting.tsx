@@ -8,7 +8,6 @@ export const Sorting = () => (
   <Tabs>
     {useList($tabs, ({ active, type, title }) => (
       <Button
-        key={type}
         className="tab"
         active={active}
         onClick={() => sortedBy(type)}>
