@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStore } from 'effector-react';
 import { Checkbox } from '../ui';
-import { $filterByAll, filterByAllToggled } from './model';
+import { $filterByAll, handleFilterByAllToggled } from './model';
 
 export const FilterByAll = () => {
   const { type, checked, title } = useStore($filterByAll);
@@ -11,7 +11,7 @@ export const FilterByAll = () => {
       value={type}
       title={title}
       checked={checked}
-      onChange={() => filterByAllToggled()}
+      onChange={handleFilterByAllToggled as any}
     />
   );
 };

@@ -14,7 +14,9 @@ export const Filter = () => (
           value={type}
           checked={checked}
           title={title}
-          onChange={() => filterByStopToggled(type)}
+          onChange={() => {
+            filterByStopToggled(type);
+          }}
         />
       ))}
     </form>

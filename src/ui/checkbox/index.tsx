@@ -1,11 +1,12 @@
 import React from 'react';
+import { Event } from 'effector';
 import './index.css';
 
 type Props = {
   title: string;
   checked: boolean;
   value?: number;
-  onChange: () => void;
+  onChange: () => void | Event<React.ChangeEvent<HTMLInputElement>>;
 };
 
 export const Checkbox: React.FC<Props> = ({
