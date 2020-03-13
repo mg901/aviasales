@@ -1,11 +1,15 @@
-import { createEvent, createStore, combine, sample, split } from 'effector';
+import { createEvent, createStore, combine, split } from 'effector';
 import { $tickets } from '../cache';
 import { makeStopsList } from './lib';
 import { makeTransferTitle } from '../lib';
 import { Filter, FilterFn } from './types';
 
 export const filterByStopToggled = createEvent<number>();
-export const filterByAllToggled = createEvent<void>();
+export const filterByAllToggled = createEvent<boolean>();
+
+export const handleFilterByAllToggled = filterByAllToggled.prepend(
+  (e: React.ChangeEvent<HTMLInputElement>) => e.target.checked,
+);
 
 const $stopsList = $tickets.map((x) => makeStopsList(x));
 
@@ -23,11 +27,9 @@ export const $filtersByStops = $stopsList.map((stopsList) =>
   })),
 );
 
-const filterByAllWasTaken = sample($filterByAll, filterByAllToggled);
-
-const { filterByAllOn, filterByAllOff } = split(filterByAllWasTaken, {
-  filterByAllOn: ({ checked }) => checked,
-  filterByAllOff: ({ checked }) => !checked,
+const { filterByAllOn, filterByAllOff } = split(filterByAllToggled, {
+  filterByAllOn: (x) => x === true,
+  filterByAllOff: (x) => x === false,
 });
 
 $filtersByStops
@@ -59,9 +61,9 @@ const $allStopsAreSelected = $filtersByStops.map((filtersByStops) =>
 );
 
 $filterByAll
-  .on(filterByAllToggled, (state) => ({
+  .on(filterByAllToggled, (state, payload) => ({
     ...state,
-    checked: !state.checked,
+    checked: payload,
   }))
   .on($allStopsAreSelected, (state, checked) => ({
     ...state,

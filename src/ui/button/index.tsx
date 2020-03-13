@@ -1,11 +1,12 @@
 import React from 'react';
+import { Event } from 'effector';
 
 type Props = {
   type?: 'button' | 'submit' | 'reset';
   active?: boolean;
   className?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: () => void | Event<React.MouseEvent<HTMLButtonElement, MouseEvent>>;
 };
 
 export const Button: React.FC<Props> = ({

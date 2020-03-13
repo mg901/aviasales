@@ -10,7 +10,9 @@ export const Sorting = () => (
       <Button
         className="tab"
         active={active}
-        onClick={() => sortedBy(type)}>
+        onClick={() => {
+          sortedBy(type);
+        }}>
         {title}
       </Button>
     ))}
